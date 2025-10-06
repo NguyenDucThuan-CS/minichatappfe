@@ -88,15 +88,26 @@ jobs:
     if: github.ref == 'refs/heads/main'
     
     steps:
-    - name: Deploy to production
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to Render
       run: |
-        echo "🚀 Deploying to production..."
-        echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-        echo "✅ Deployment completed successfully!"
+        echo "🚀 Deploying to Render..."
+        echo "✅ Docker image built and pushed to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+        echo "📋 Next steps:"
+        echo "1. Go to https://dashboard.render.com"
+        echo "2. Create a new Web Service"
+        echo "3. Connect your GitHub repository"
+        echo "4. Use Docker deployment"
+        echo "5. Set Dockerfile path to: ./Dockerfile"
+        echo "6. Set Docker context to: ."
+        echo "7. Enable auto-deploy from main branch"
+        echo ""
+        echo "🎉 Your app will be available at: https://[your-service-name].onrender.com"
         
-    # Add your actual deployment steps here, such as:
-    # - Deploy to cloud platforms (AWS, GCP, Azure)
-    # - Update Kubernetes clusters
-    # - Deploy to container orchestration platforms
-    # - Update load balancers
-    # - Send notifications
+    - name: Notify deployment status
+      run: |
+        echo "✅ CI/CD Pipeline completed successfully!"
+        echo "🐳 Docker image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+        echo "🌐 Ready for Render deployment!"

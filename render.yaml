@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: chatapp-frontend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+    healthCheckPath: /
+    autoDeploy: true
+    pullRequestPreviewsEnabled: true
